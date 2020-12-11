@@ -3,20 +3,19 @@ import matplotlib.pyplot as plt
 from scipy.signal import convolve
 from scipy.integrate import cumtrapz
 
-#PDE parameters
-v = 0.15 # 0.15m/s or 0.8m/s
+#Parameters
+v = 0.15 
 R = [5,2.5,0.5,0.25]
-N_th = 150000 #200000
-Q_value = [0.000033, 0.0002, 0.000833, 0.00167]
-K_value = [0.00088, 0.0053, 0.0220, 0.0441] 
-#[0.000879, 0.00528, 0.0220, 0.0441] 
+N_th = 150000
+Q_value = [0.000033, 0.0002, 0.00083, 0.0017]
+K_value = [0.00088, 0.0053, 0.022, 0.044] 
 
 scenario = 0
 R = R[3]
 Q = Q_value[scenario]
 K = K_value[scenario]
 
-eval = 3.5
+eval = 3.5 #need to find required evaluation time from TTI at furthest corner.
 
 #mesh
 l= 8
@@ -40,7 +39,7 @@ t = np.linspace(0.1,t_end+0.1,n_t)
 #set up convolution
 S = np.full(len(t), R)
 
-m = int(34*eval) #nodes
+m = int(34*eval)
 
 for i in range(len(x)):
     for j in range(int((len(y)+1)/2)):
@@ -70,7 +69,6 @@ for i in range(len(x)):
 myfile.close()
 
 contour_levels = range(0,(int(eval)+1)*60,5)
-#contour_levels = range(0,(int(eval)+1)*60,10)
 
 #plot TTI
 fig,ax = plt.subplots(1,1)
