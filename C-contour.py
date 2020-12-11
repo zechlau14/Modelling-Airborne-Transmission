@@ -5,15 +5,13 @@ from scipy.signal import convolve
 #PDE parameters
 v = 0.15
 R = 1
-Q_value = [0.000033, 0.0002, 0.000833, 0.00167]
-K_value = [0.00088, 0.0053, 0.0220, 0.0441] 
-#[0.000879, 0.00528, 0.0220, 0.0441] 
+Q_value = [0.000033, 0.0002, 0.00083, 0.0017]
+K_value = [0.00088, 0.0053, 0.022, 0.044] 
 
+hour = 1
 scenario = 0
 Q = Q_value[scenario]
 K = K_value[scenario]
-
-hour = 1
 
 #mesh
 l= 8
@@ -30,12 +28,11 @@ x_o = 4
 y_o = 4
 
 t_end = 60*60*hour 
-delta_t = 0.3 # 0.25
+delta_t = 0.3
 n_t = int(t_end/delta_t) + 1
 t = np.linspace(0.1,t_end+0.1,n_t)
 
 #set up convolution
-#I = np.zeros(len(t))
 S = np.full(len(t), R)
 
 m = int(34*hour) #nodes
@@ -52,7 +49,6 @@ for i in range(len(x)):
         I = 1/(4*np.pi*K*t) * C_y * C_x * np.exp(-Q*t)
         C[j][i] = convolve(S,I,mode='valid')*delta_t
         C[len(y)-1-j][i] = C[j][i]
-
 
 txt_name = "./data/indoors-C-contour-Q" +str(Q) + "-t" + str(hour) + ".txt"
 myfile = open(txt_name,"w")
@@ -71,6 +67,6 @@ plt.clabel(cp,fontsize=12, fmt='%1.0f $R$',colors='black')
 ax.set_xlim([0,8])
 ax.set_ylim([0,8])
 ax.tick_params(axis='both',labelsize=12)
-filename = "./plots/indoors-C-contour-Q" + str(Q) + "-t" + str(hour) + ".png"
+filename = "./plots/C-contour-Q" + str(Q) + "-t" + str(hour) + ".png"
 plt.savefig(filename)
 plt.show()
