@@ -4,20 +4,17 @@ from scipy.integrate import cumtrapz
 from scipy.signal import convolve
 
 #PDE parameters
-v = 0.15 # 0.15m/s or 0.8m/s
+v = 0.15
 R = [5,2.5,0.5,0.25]
-N_th = 150000 #200000
-Q_value = [0.000033, 0.0002, 0.000833, 0.00167]
-K_value = [0.00088, 0.0053, 0.0220, 0.0441] 
+N_th = 150000 
+Q_value = [0.000033, 0.0002, 0.00083, 0.0017]
+K_value = [0.00088, 0.0053, 0.022, 0.044] 
 
 R = R[3]
-eval = 21 #20 for scenario 3, R 0.25
+eval = 21 #21 for scenario 3, R 0.25
 scenario = 3
 Q = Q_value[scenario]
 K = K_value[scenario]
-
-#Q = 0.01/3600
-#K = Q * 192 * (384**(-1/3))
 
 #Domain
 l = 8
@@ -61,7 +58,6 @@ if C_test > N_th:
     while C_int[i] > N_th:
         i = i-1
     ans = t[i] / (60)
-    print(ans)
+    print("TTI = " + str(ans) + "min")
 else:
-    print("C_int = " + str(C_test))
     print("No solution found, need longer evaluation time")
