@@ -5,23 +5,22 @@ from scipy.integrate import trapz
 from scipy.integrate import cumtrapz
 
 #PDE parameters
-v = 0.15 # 0.15m/s or 0.8m/s
+v = 0.15
 R = [5,2.5,0.5,0.25]
-N_th = 150000 #200000
-Q_value = [0.000033, 0.0002, 0.000833, 0.00167]
-K_value = [0.00088, 0.0053, 0.0220, 0.0441] 
+N_th = 150000
+Q_value = [0.000033, 0.0002, 0.00083, 0.0017]
+K_value = [0.00088, 0.0053, 0.022, 0.044] 
 
 scenario = 0
 R = R[0]
 Q = Q_value[scenario]
 K = K_value[scenario]
-
 eval = 3 #hours
 
 #mesh
 l= 8
 b= 8
-delta_x = 0.1 #0.05
+delta_x = 0.05 #0.1
 n_x = int(l / delta_x + 1)
 x = np.linspace(0,l,n_x)
 y = np.linspace(0,b,n_x) 
@@ -33,7 +32,7 @@ x_o = l/2
 y_o = b/2
 
 t_end = 60*60*eval 
-delta_t = 0.3 # 0.25
+delta_t = 0.3
 n_t = int(t_end/delta_t)+1
 t = np.linspace(0.1,t_end+0.1,n_t)
 
@@ -65,4 +64,4 @@ for i in range(len(x)):
 
 Prob = Counter / (len(x)*len(y)) * 100
 
-print("Prob of infection = " + str(Prob) + "%")
+print("Infection Risk = " + str(Prob) + "%")
