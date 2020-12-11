@@ -8,7 +8,7 @@ N_th = 150000
 R = np.arange(0.1,10.1,0.1)
 
 # infinite room case
-K = 0.18 #0.22-15 #0.18-12 #0.089-6 # 0.044-3
+K = 0.18
 T_inf = np.zeros_like(R)
 
 #time steps
@@ -25,9 +25,9 @@ for i in range(len(R)):
     T_inf[i] = TTI / 60  
 
 #finite rooms
-Q_values = [0,0.0002,0.000833,0.00167]
+Q_values = [0,0.0002,0.00083,0.0017]
 Q = Q_values[1]
-eval = 144 #20 #120
+eval = 20 #most difficult to find the right time here for small values of R.
 TTI_limit = 180
 # setting up room dimensions: 4x4 (personal room), 8x8 (classroom), 30x15 (basketball court/auditorium); 105x68 (football field)
 h = 3
@@ -51,7 +51,6 @@ delta_t = 0.3
 n_t = int(t_end/delta_t) + 1
 t = np.linspace(0.1,t_end+0.1,n_t)
 
-#for i in range(3,len(l)):
 for i in range(len(l)):
     k = int( v * 3600 / (2*l[i]) * eval)  #nodes
     C_y = np.exp(-((y[i]-y_o[i])**2)/(4*K[i]*t)) + np.exp(-((y[i]+y_o[i])**2)/(4*K[i]*t))
@@ -63,7 +62,6 @@ for i in range(len(l)):
         C_x = C_x + np.exp(-((x[i]-x_o[i] -v*t + 2*n*b[i])**2)/(4*K[i]*t)) + np.exp(-((x[i]+x_o[i]+v*t - 2*n*b[i])**2)/(4*K[i]*t))
     I = 1/(4*np.pi*K[i]*t) * C_y * C_x * np.exp(-Q*t)
     
-    #for j in range(0,2):
     for j in range(len(R)):
         S = np.full(len(t), R[j])      
         C = convolve(S,I)[0:len(t)] * delta_t
@@ -76,10 +74,6 @@ for i in range(len(l)):
 txt_name = "./data/TTI-vs-R.txt"
 myfile = open(txt_name,"w")
 myfile = open(txt_name,"a")
-"""for j in range(len(R)):
-    words = str(T[i][j]) + ","
-    myfile.write(words)
-"""
 for i in range(len(l)):
     j = 0
     while j < len(R)-1:
@@ -87,7 +81,6 @@ for i in range(len(l)):
         myfile.write(words)
         j = j + 1
     myfile.write(str(T[i][j]) + "\n")
-
 myfile.close()
 
 #plot 
