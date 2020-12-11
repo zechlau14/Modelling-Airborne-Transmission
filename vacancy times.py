@@ -3,12 +3,12 @@ import matplotlib.pyplot as plt
 from scipy.signal import convolve
 
 #PDE parameters
-v = 0.15 # 0.15m/s
-R = [5,2.5,0.5,0.25] #0.5
+v = 0.15 
+R = [5,2.5,0.5,0.25]
 Q = [0.000033, 0.0002, 0.00083, 0.0017]
 K = [0.00088, 0.0053, 0.022, 0.044] 
 #ss = [ [16,25,37,52] , [24,39,61,96] , [64,110,240,447] , [100,176,462,885] ] #OTL
-ss = [ [16,25,37,52] , [24,39,61,96] , [64,110,90,120] , [100,176,90,120] ] #OTL + SS
+ss = [ [16,25,37,52] , [24,39,61,96] , [64,110,90,120] , [100,176,90,120] ]
 
 act = int(input("Enter act (0-3): "))
 scenario = int(input("Enter scenario (0-3): "))
@@ -19,19 +19,18 @@ ss = ss[act][scenario]
 
 x = 5
 y = 4
-hour = 36 #8
-#C_target = 13.8 # 3 hours 
-C_target = 1.5
+hour = 8 #36
+C_target = 13.8
 
 #Domain
 l = 8 
 b = 8  
 
-#source's position (currently the centre)
+#source's position
 x_o = 4
 y_o = 4
 
-# graph's axis
+#time
 t_end = 60*60 * hour
 delta_t = 0.3 # 0.025
 n_t = int(t_end/delta_t) + 1
@@ -56,21 +55,9 @@ C = convolve(S,I)[0:len(t)] * delta_t
 
 t = t / 60
 
-if C[-1] > C_target: print("End C = " + str(C[-1]))
+if C[-1] > C_target: print("Evaluation time is not enough to clean the air.")
 else:
     n = n_ss
     while C[n] > C_target : n = n+1 
-    print("C is almost zero at t = " + str(int(t[n])) + "minutes.")
-    print("OTL ends at t = " + str(ss) + "minutes.")
     t_vacant = t[n] - ss
     print("Required vacancy time is " + str(int(t_vacant)) + "minutes.")
-"""
-plt.plot(t,C,color='black')
-#plt.hlines(13.8,t[0],t[-1], color='red')
-plt.hlines(C_target,t[0],t[-1], color='red')
-plt.xticks(fontsize=12)
-plt.yticks(fontsize=12)
-#plot_name = "./plots/C-vs-t-log-XY" +str(x) + str(y) + ".png"
-#plt.savefig(plot_name)
-plt.show()
-"""
