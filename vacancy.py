@@ -32,7 +32,7 @@ y_o = 4
 
 #time
 t_end = 60*60 * hour
-delta_t = 0.3 # 0.025
+delta_t = 0.3
 n_t = int(t_end/delta_t) + 1
 t = np.linspace(0.1,t_end+0.1,n_t)
 n_ss = int(ss*60 / delta_t)
