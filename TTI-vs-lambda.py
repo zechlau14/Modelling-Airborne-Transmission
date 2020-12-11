@@ -5,7 +5,7 @@ from scipy.integrate import cumtrapz
 
 #PDE parameters
 V = 192
-v = 0.15 # 0.15m/s 
+v = 0.15
 R = [5,2.5]
 #R = [0.5,0.25]
 N_th = 150000
@@ -25,11 +25,12 @@ y_o = 4
 
 x = 8
 y = 8
-eval = 6 #10.5 #7.5 #6 #1.5
+eval = 6 #Evaluation time to be found using TTI-point
+#10.5 #7.5 #6 #1.5
 
 # graph's axis
 t_end = 60*60 * eval
-delta_t = 0.3 # 0.25
+delta_t = 0.3
 n_t = int(t_end/delta_t) + 1
 t = np.linspace(0.1,t_end+0.1,n_t)
 
@@ -75,6 +76,6 @@ plt.plot(3600*Q,T[1],linestyle='dashed',color='blue')
 #plt.scatter(q_case,T_case_mask,color='blue',marker="x")
 plt.xticks(fontsize=12)
 plt.yticks(fontsize=12)
-#plot_name = "./plots/" + file_name + ".png"
-#plt.savefig(plot_name)
+plot_name = "./plots/" + file_name + ".png"
+plt.savefig(plot_name)
 plt.show()
