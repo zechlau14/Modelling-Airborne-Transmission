@@ -11,14 +11,14 @@ d = 1.7*10**(-4) #deactivation rate
 s = 1.1*10**(-4) #settling rate
 R = np.linspace(1,7.5,66)
 
-time = 48 #24 #in hours
+time = 24 #48 #24 #in hours
 w = 8 #y-length
 l = 8 #x-length
 h = 3 #z-length
 x_o = 4 #x-coordinate of source
 y_o = 4 #y-coordinate of source
-x = 8 #x-coordinate of point evaluated at
-y = 8 #y-coordinate of point evaluated at
+x = 5 #x-coordinate of point evaluated at
+y = 4 #y-coordinate of point evaluated at
 p = 1.3*10**(-4) #breathing rate
 k = 0.0069 #constant for dose-response model
 P_r = 0.5
@@ -59,12 +59,12 @@ for i in range(len(Q)):
             TTPI[i][j] = t[n]/60
 
 #plot 
-plt.loglog(R,TTPI[0],linestyle='dashed',color='red')
-plt.loglog(R,TTPI[1],linestyle='solid',color='orange')
-plt.loglog(R,TTPI[2],linestyle='dashdot',color='green')
-plt.loglog(R,TTPI[3],linestyle='dotted',color='blue')
+plt.loglog(R,TTPI[0],linestyle='dashed',color='red',linewidth=2)
+plt.loglog(R,TTPI[1],linestyle='solid',color='orange',linewidth=2)
+plt.loglog(R,TTPI[2],linestyle='dashdot',color='green',linewidth=2)
+plt.loglog(R,TTPI[3],linestyle='dotted',color='blue',linewidth=2)
 plt.xticks(fontsize=12)
 plt.yticks(fontsize=12)
-plt.xlabel("log$_{10}$ $R$")
-plt.ylabel("TTPI (min)")
+#plt.xlabel("log$_{10}$ $R$")
+#plt.ylabel("TTPI (min)")
 plt.show()
