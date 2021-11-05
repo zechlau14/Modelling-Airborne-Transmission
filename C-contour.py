@@ -19,16 +19,16 @@ delta_x = 0.05 #(m) mesh-size
 delta_t = 1 #(s) time-steps
 
 #set up mesh
-n_x = int(l / delta_x) + 1 #calculate number of x-steps
-n_y = int(w / delta_x) + 1 #calculate number of y-steps
+n_x = int(l / delta_x) + 1 #int: calculate number of x-steps
+n_y = int(w / delta_x) + 1 #int:calculate number of y-steps
 x = np.linspace(0,l,n_x) #define numpy array for x-axis
 y = np.linspace(0,w,n_y) #define numpy array for y-axis
 X,Y = np.meshgrid(x,y) #define numpy meshgrid for X,Y
 C = np.zeros_like(X) #Initialise numpy array of same size as X for C (the concentration)
 
 #time-axis
-t_end = 60*60*time #convert event duration to seconds
-n_t = int(t_end/delta_t) #calculate number of time steps
+t_end = 60*60*time #float: convert event duration to seconds
+n_t = int(t_end/delta_t) #int: calculate number of time steps
 t = np.linspace(delta_t,t_end,n_t) #define numpy array for time axis
 
 
