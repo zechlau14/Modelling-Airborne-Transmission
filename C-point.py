@@ -44,7 +44,7 @@ for n in range(1,m+1):
     I_x += np.exp(-((x-x_o -v*t - 2*n*l)**2)/(4*K*t)) + np.exp(-((x+x_o+v*t + 2*n*l)**2)/(4*K*t))
     
 sinks = np.exp(-(Q+d+s)*t)  #numpy array of size len(t). Calculates the effect of ventilation, deactivation and settling sinks
-I = 1/(4*np.pi*K*t) * I_y * I_x * sinks #Impulse function at (x,y)
+I = 1/(4*np.pi*K*t) * I_y * I_x * sinks #Impulse function at (x,y)  - numpy array of size len(t)
 
 #use Scipy Convolve function for S and I to calculate the C at (x,y)
 C = convolve(S,I)[0:len(t)] / (h/2)
