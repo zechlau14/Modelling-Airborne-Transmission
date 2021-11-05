@@ -1,8 +1,8 @@
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.signal import convolve
+import numpy as np #import numpy library to enable numpy arrays and numpy meshgrid
+import matplotlib.pyplot as plt #import matplotlib.pyplot to plot graphs
+from scipy.signal import convolve #import convolve function from scipy.signal library
 
-#parameters
+#parameters values (user inputs)
 time = 1 #event duration, in hours
 l = 8 #x-length (m) of room
 w = 8 #y-length (m) of room
@@ -15,9 +15,10 @@ Q = 0.0002 # Air exchange rate (s^-1)
 K = 0.0053 # Eddy diffusion coefficient (m^2/s)
 d = 1.7*10**(-4) #deactivation rate (s^-1)
 s = 1.1*10**(-4) #settling rate (s^-1)
+delta_x = 0.05 #(m) mesh-size
+delta_t = 1 #(s) time-steps
 
 #set up mesh
-delta_x = 0.05 #(m) mesh-size
 n_x = int(l / delta_x) + 1
 n_y = int(w / delta_x) + 1
 x = np.linspace(0,l,n_x)
@@ -27,7 +28,6 @@ C = np.zeros_like(X) #Initialise C - the concentration
 
 #time-axis
 t_end = 60*60*time #convert event duration to seconds
-delta_t = 1 #(s) time-steps
 n_t = int(t_end/delta_t)
 t = np.linspace(delta_t,t_end,n_t)
 
