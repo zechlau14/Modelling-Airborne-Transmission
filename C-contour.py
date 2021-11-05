@@ -60,7 +60,7 @@ for i in range(len(x)):
         I_x[i] += np.exp(-((x[i]-x_o -v*t + 2*n*l)**2)/(4*K*t)) + np.exp(-((x[i]+x_o+v*t - 2*n*l)**2)/(4*K*t))
         I_x[i] += np.exp(-((x[i]-x_o -v*t - 2*n*l)**2)/(4*K*t)) + np.exp(-((x[i]+x_o+v*t + 2*n*l)**2)/(4*K*t))
         
-sinks = np.exp(-(Q+d+s)*t) #numpy array of size len(t). Calculates the effect of ventilation, deactivation and settling sinks
+sinks = np.exp(-(Q+d+s)*t) #numpy array of size len(t). For each value of t, calculate the effect of ventilation, deactivation and settling sinks = exp(-(Q+d+s)*t)
 
 #For each mesh point (x,y), calculate the corresponding Impulse function, I [an array of size len(t)]. 
 #Then use Scipy Convolve function for S and I to calculate the C at (x,y)
