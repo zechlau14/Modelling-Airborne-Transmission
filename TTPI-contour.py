@@ -80,9 +80,9 @@ for i in range(len(x)):
 T = T/60 #convert TTPI to minutes
 #Uses Matplotlib.pyplot to produce a black and white contour plot of X,Y,T
 fig,ax = plt.subplots(1,1)
-cp = ax.contour(X,Y,T,colors='black')
+cp = ax.contour(X,Y,T,colors='black', levels=7)
 #Forces the graph produced to be in the shape of a square
 plt.axis('square') #comment this line out if the room is not square
 ax.tick_params(axis='both',labelsize=12) #changes the axis font size to 12
-plt.clabel(cp,fontsize=12, levels=7, fmt='%1.0f',colors='black')  #Change the contour labels to floats of 0 decimal place with fontsize 12
+plt.clabel(cp,fontsize=12, fmt='%1.0f',colors='black')  #Change the contour labels to floats of 0 decimal place with fontsize 12
 plt.show()
